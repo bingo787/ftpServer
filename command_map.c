@@ -71,8 +71,10 @@ void do_command_map(Session_t *sess)
     int size = sizeof(ctrl_cmds) / sizeof(ctrl_cmds[0]); //数组大小
     for (i=0; i<size; ++i)
     {
+     // printf("%s == %s\n",ctrl_cmds[i].cmd,sess->com);
         if (strcmp(ctrl_cmds[i].cmd, sess->com) == 0)
         {
+
             if (ctrl_cmds[i].cmd_handler != NULL)
             {
                 ctrl_cmds[i].cmd_handler(sess);
@@ -222,6 +224,7 @@ void do_port(Session_t *sess)
 
 void do_pasv(Session_t *sess)
 {
+    //printf("%s\n",__FUNCTION__ );
     char ip[16] = {0};
     get_local_ip(ip);
 

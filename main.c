@@ -14,7 +14,7 @@ int main(int argc, const char *argv[])
     setup_signal_chld();
 
     //解析配置文件
-    parseconf_load_file("ftpserver.conf");
+    parseconf_load_file("../config/ftpserver.conf");
     print_conf();
 
     init_hash();  
