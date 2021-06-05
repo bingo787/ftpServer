@@ -1,13 +1,12 @@
 #include "command_map.h"
-#include "common.h"
+#include "common_sys_header.h"
 #include "session.h"
-#include "sysutil.h"
-#include "ftp_codes.h"
-#include "configure.h"
-#include "trans_data.h"
+#include "utils.h"
+#include "ftp_codes_define.h"
+#include "configuration.h"
+#include "transport_data.h"
 #include "priv_sock.h"
-#include "strutil.h"
-#include "trans_ctrl.h"
+#include "transport_ctrl.h"
 
 
 typedef struct Ftpcmd

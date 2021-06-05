@@ -1,10 +1,10 @@
-#include "trans_ctrl.h"
-#include "common.h"
-#include "sysutil.h"
-#include "configure.h"
+#include "transport_ctrl.h"
+#include "common_sys_header.h"
+#include "utils.h"
+#include "configuration.h"
 #include "command_map.h"
-#include "ftp_codes.h"
-#include "strutil.h"
+#include "ftp_codes_define.h"
+
 Session_t *p_sess = NULL;
 
 static void handle_signal_alarm_ctrl_fd(int sig);

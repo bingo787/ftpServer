@@ -1,8 +1,8 @@
 #include "priv_command.h"
-#include "common.h"
-#include "sysutil.h"
+#include "common_sys_header.h"
+#include "utils.h"
 #include "priv_sock.h"
-#include "configure.h"
+#include "configuration.h"
 
 //获取数据套接字
 void privop_pasv_get_data_sock(Session_t *sess)

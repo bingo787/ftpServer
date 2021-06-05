@@ -1,11 +1,11 @@
-#include "trans_data.h"
-#include "common.h"
-#include "sysutil.h"
-#include "ftp_codes.h"
+#include "transport_data.h"
+#include "common_sys_header.h"
+#include "utils.h"
+#include "ftp_codes_define.h"
 #include "command_map.h"
-#include "configure.h"
+#include "configuration.h"
 #include "priv_sock.h"
-#include "trans_ctrl.h"
+#include "transport_ctrl.h"
 
 //这5个函数为静态函数, 他们只能在本文件中使用
 static const char *statbuf_get_perms(struct stat *sbuf);

@@ -1,6 +1,6 @@
 #include "ftp_nobody.h"
-#include "common.h"
-#include "sysutil.h"
+#include "common_sys_header.h"
+#include "utils.h"
 #include "priv_command.h"
 #include "priv_sock.h"
 

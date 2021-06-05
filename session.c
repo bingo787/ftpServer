@@ -1,9 +1,9 @@
 #include "session.h"
-#include "common.h"
+#include "common_sys_header.h"
 #include "ftp_proto.h"
 #include "ftp_nobody.h"
 #include "priv_sock.h"
-#include "configure.h"
+#include "configuration.h"
 
 void session_init(Session_t *sess)
 {

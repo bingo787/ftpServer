@@ -1,7 +1,7 @@
 #include "parse_conf.h"
-#include "common.h"
-#include "strutil.h"
-#include "configure.h"
+#include "common_sys_header.h"
+#include "utils.h"
+#include "configuration.h"
 
 /*
  * parseconf_load_setting()函数只是

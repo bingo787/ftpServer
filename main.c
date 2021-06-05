@@ -1,7 +1,7 @@
-#include "common.h"
-#include "sysutil.h"
+#include "common_sys_header.h"
+#include "utils.h"
 #include "session.h"
-#include "configure.h"
+#include "configuration.h"
 #include "parse_conf.h"
 #include "ftp_assist.h"
 
@@ -14,7 +14,7 @@ int main(int argc, const char *argv[])
     setup_signal_chld();
 
     //解析配置文件
-    parseconf_load_file("../config/ftpserver.conf");
+    parseconf_load_file("ftpserver.conf");
     print_conf();
 
     init_hash();  

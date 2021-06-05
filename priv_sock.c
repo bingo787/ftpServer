@@ -1,7 +1,7 @@
 #include "priv_sock.h"
-#include "common.h"
-#include "sysutil.h"
-#include "trans_ctrl.h"
+#include "common_sys_header.h"
+#include "utils.h"
+#include "transport_ctrl.h"
 
 
 void priv_sock_init(Session_t *sess)

@@ -8,13 +8,12 @@ add_executable(ftpserver
         main.c
         priv_command.c
         session.c
-        sysutil.c
-        trans_ctrl.c
-        configure.c
+        utils.c
+        transport_ctrl.c
+        configuration.c
         ftp_nobody.c
         hash.c
         parse_conf.c
         priv_sock.c
-        strutil.c
-        trans_data.c)
+        transport_data.c)
 target_link_libraries(ftpserver crypt)

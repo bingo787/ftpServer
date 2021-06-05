@@ -1,4 +1,4 @@
-#include "configure.h"
+#include "configuration.h"
 
 int tunable_pasv_enable = 1;
 int tunable_port_enable = 1;

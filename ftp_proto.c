@@ -1,10 +1,9 @@
 #include "ftp_proto.h"
-#include "common.h"
-#include "sysutil.h"
-#include "strutil.h"
-#include "ftp_codes.h"
+#include "common_sys_header.h"
+#include "utils.h"
+#include "ftp_codes_define.h"
 #include "command_map.h"
-#include "trans_ctrl.h"
+#include "transport_ctrl.h"
 
 //子进程不断的从FTP客户端接收FTP指令，并给与回应
 void handle_proto(Session_t *sess)

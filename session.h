@@ -1,7 +1,7 @@
 #ifndef _SESSION_H_
 #define _SESSION_H_
 
-#include "common.h"
+#include "common_sys_header.h"
 #define MAX_COMMAND 1024
 
 /*
