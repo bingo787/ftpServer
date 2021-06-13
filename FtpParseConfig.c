@@ -58,7 +58,7 @@ parseconf_str_array[] =
 };
 
 //parseconf_load_file()
-void parseconf_load_file(const char *path)
+void LoadFile(const char *path)
 {
     FILE *fp = fopen(path, "r");
     if (fp == NULL)

@@ -5,7 +5,7 @@
 #include "FtpPrivSock.h"
 #include "FtpGlobalConfiguration.h"
 
-void session_init(Session_t *sess)
+void SessionInit(ConnectionSession_t *sess)
 {
     memset(sess->command, 0, sizeof (sess->command));
     memset(sess->com, 0, sizeof (sess->com));
@@ -40,14 +40,14 @@ void session_init(Session_t *sess)
     sess->curr_ip_clients = 0;
 }
 
-void session_reset_command(Session_t *sess)
+void session_reset_command(ConnectionSession_t *sess)
 {
     memset(sess->command, 0, sizeof (sess->command));
     memset(sess->com, 0, sizeof (sess->com));
     memset(sess->args, 0, sizeof (sess->args));
 }
 
-void session_begin(Session_t *sess)
+void session_begin(ConnectionSession_t *sess)
 {
     priv_sock_init(sess);
 

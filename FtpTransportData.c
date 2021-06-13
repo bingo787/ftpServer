@@ -14,17 +14,17 @@ static const char *statbuf_get_user_info(struct stat *sbuf);
 static const char *statbuf_get_size(struct stat *sbuf);
 
 //判断主动模式是否开启
-static int is_port_active(Session_t *sess);
+static int is_port_active(ConnectionSession_t *sess);
 //判断被动模式是否开启
-static int is_pasv_active(Session_t *sess);
+static int is_pasv_active(ConnectionSession_t *sess);
 
-static void get_port_data_fd(Session_t *sess);
-static void get_pasv_data_fd(Session_t *sess);
+static void get_port_data_fd(ConnectionSession_t *sess);
+static void get_pasv_data_fd(ConnectionSession_t *sess);
 
-static void trans_list_common(Session_t *sess, int list);
-static int get_trans_data_fd(Session_t *sess);
+static void trans_list_common(ConnectionSession_t *sess, int list);
+static int get_trans_data_fd(ConnectionSession_t *sess);
 
-void download_file(Session_t *sess)
+void download_file(ConnectionSession_t *sess)
 {
     //进入数据传输阶段
     sess->is_translating_data = 1;
@@ -138,7 +138,7 @@ void download_file(Session_t *sess)
     sess->is_translating_data = 0;    
 }
 
-void upload_file(Session_t *sess, int is_appe)
+void upload_file(ConnectionSession_t *sess, int is_appe)
 {
     //进入数据传输阶段
     sess->is_translating_data = 1;
@@ -264,7 +264,7 @@ void upload_file(Session_t *sess, int is_appe)
     sess->is_translating_data = 0;
 }
 
-void trans_list(Session_t *sess, int list)
+void trans_list(ConnectionSession_t *sess, int list)
 {
     //发起数据连接
     if(get_trans_data_fd(sess) == 0)
@@ -286,7 +286,7 @@ void trans_list(Session_t *sess, int list)
 }
 
 //返回值表示成功与否
-static int get_trans_data_fd(Session_t *sess)
+static int get_trans_data_fd(ConnectionSession_t *sess)
 {
     int is_port = is_port_active(sess);
     int is_pasv = is_pasv_active(sess);
@@ -442,12 +442,12 @@ static const char *statbuf_get_size(struct stat *sbuf)
     return buf;
 }
 
-static int is_port_active(Session_t *sess)
+static int is_port_active(ConnectionSession_t *sess)
 {
     return (sess->p_addr != NULL);
 }
 
-static int is_pasv_active(Session_t *sess)
+static int is_pasv_active(ConnectionSession_t *sess)
 {
     //首先给nobody发命令
     priv_sock_send_cmd(sess->proto_fd, PRIV_SOCK_PASV_ACTIVE);
@@ -455,7 +455,7 @@ static int is_pasv_active(Session_t *sess)
     return priv_sock_recv_int(sess->proto_fd);
 }
 
-static void get_port_data_fd(Session_t *sess)
+static void get_port_data_fd(ConnectionSession_t *sess)
 {
     //发送cmd
     priv_sock_send_cmd(sess->proto_fd, PRIV_SOCK_GET_DATA_SOCK);
@@ -480,7 +480,7 @@ static void get_port_data_fd(Session_t *sess)
     sess->p_addr = NULL;
 }
 
-static void get_pasv_data_fd(Session_t *sess)
+static void get_pasv_data_fd(ConnectionSession_t *sess)
 {
     //先给nobody发命令
     priv_sock_send_cmd(sess->proto_fd, PRIV_SOCK_PASV_ACCEPT);
@@ -499,7 +499,7 @@ static void get_pasv_data_fd(Session_t *sess)
 }
 
 
-static void trans_list_common(Session_t *sess, int list)
+static void trans_list_common(ConnectionSession_t *sess, int list)
 {
     DIR *dir = opendir(".");
     if(dir == NULL)

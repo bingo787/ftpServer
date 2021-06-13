@@ -6,7 +6,7 @@
  */
 #include "FtpSession.h"
 
-void limit_curr_rate(Session_t *sess, int nbytes, int is_upload);
+void limit_curr_rate(ConnectionSession_t *sess, int nbytes, int is_upload);
 
 //控制连接
 void setup_signal_alarm_ctrl_fd();
@@ -20,8 +20,8 @@ void cancel_signal_alarm();
 
 void setup_signal_sigurg();
 
-void do_site_chmod(Session_t *sess, char *args);
-void do_site_umask(Session_t *sess, char *args);
-void do_site_help(Session_t *sess);
+void do_site_chmod(ConnectionSession_t *sess, char *args);
+void do_site_umask(ConnectionSession_t *sess, char *args);
+void do_site_help(ConnectionSession_t *sess);
 
 #endif  /*_TRANS_CTRL_H_*/

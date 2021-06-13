@@ -3,6 +3,6 @@
 
 #include "FtpSession.h"
 
-void handle_nobody(Session_t *sess);
+void handle_nobody(ConnectionSession_t *sess);
 
 #endif  /*_FTP_NOBODY_H_*/

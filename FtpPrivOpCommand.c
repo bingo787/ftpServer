@@ -5,7 +5,7 @@
 #include "FtpGlobalConfiguration.h"
 
 //获取数据套接字
-void privop_pasv_get_data_sock(Session_t *sess)
+void privop_pasv_get_data_sock(ConnectionSession_t *sess)
 {
     char ip[16] = {0};
     priv_sock_recv_str(sess->nobody_fd, ip, sizeof ip);
@@ -27,14 +27,14 @@ void privop_pasv_get_data_sock(Session_t *sess)
 }
 
 //判断pasv模式是否开启
-void privop_pasv_active(Session_t *sess)
+void privop_pasv_active(ConnectionSession_t *sess)
 {
     //发给proto结果
     priv_sock_send_int(sess->nobody_fd, (sess->listen_fd != -1));
 }
 
 //获取监听fd
-void privop_pasv_listen(Session_t *sess)
+void privop_pasv_listen(ConnectionSession_t *sess)
 {
     //创建listen fd
     char ip[16] = {0};
@@ -55,7 +55,7 @@ void privop_pasv_listen(Session_t *sess)
 }
 
 //accept一个新的连接
-void privop_pasv_accept(Session_t *sess)
+void privop_pasv_accept(ConnectionSession_t *sess)
 {
     //接受新连接
     int peerfd = accept_timeout(sess->listen_fd, NULL, tunable_accept_timeout);

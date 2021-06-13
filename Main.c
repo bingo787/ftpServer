@@ -5,32 +5,30 @@
 #include "FtpParseConfig.h"
 #include "FtpCryptoHash.h"
 
+void InitEnv(){
+
+  CheckPermission();
+  SetupSignalChld();
+  LoadFile("ftpserver.conf");
+  PrintConf();
+  InitHash();
+}
+
 int main(int argc, const char *argv[])
 {
-    //使用root权限运行
-    check_permission();
 
-    //处理僵尸进程
-    setup_signal_chld();
+    InitEnv();
 
-    //解析配置文件
-    parseconf_load_file("ftpserver.conf");
-    print_conf();
 
-    init_hash();  
-
-    //创建一个监听fd
     int listenfd = tcp_server(tunable_listen_address, tunable_listen_port);
-
     pid_t pid;
-    Session_t sess;
-    session_init(&sess);
+    ConnectionSession_t sess;
+    SessionInit(&sess);
     p_sess = &sess; //配置全局变量
 
     while(1)
     {
-        //每当用户连接上，就fork一个子进程
-       
+
         struct sockaddr_in addr;
         int peerfd = accept_timeout(listenfd, &addr, tunable_accept_timeout);
         if(peerfd == -1 && errno == ETIMEDOUT)

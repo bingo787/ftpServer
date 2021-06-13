@@ -11,7 +11,7 @@
 typedef struct Ftpcmd
 {
     const char *cmd; //FTP指令
-    void (*cmd_handler)(Session_t *sess);//该指令所对应的执行函数
+    void (*cmd_handler)(ConnectionSession_t *sess);//该指令所对应的执行函数
 } ftpcmd_t;
 
 static ftpcmd_t ctrl_cmds[] = {
@@ -63,7 +63,7 @@ static ftpcmd_t ctrl_cmds[] = {
 };
 
 //进行命令映射
-void do_command_map(Session_t *sess)
+void do_command_map(ConnectionSession_t *sess)
 {
     int i;
     int size = sizeof(ctrl_cmds) / sizeof(ctrl_cmds[0]); //数组大小
@@ -94,21 +94,21 @@ void do_command_map(Session_t *sess)
     }
 }
 
-void ftp_reply(Session_t *sess, int status, const char *text)
+void ftp_reply(ConnectionSession_t *sess, int status, const char *text)
 {
     char tmp[1024] = { 0 };
     snprintf(tmp, sizeof tmp, "%d %s\r\n", status, text);
     writen(sess->peer_fd, tmp, strlen(tmp));
 }
 
-void ftp_lreply(Session_t *sess, int status, const char *text)
+void ftp_lreply(ConnectionSession_t *sess, int status, const char *text)
 {
     char tmp[1024] = { 0 };
     snprintf(tmp, sizeof tmp, "%d-%s\r\n", status, text);
     writen(sess->peer_fd, tmp, strlen(tmp));
 }
 
-void do_user(Session_t *sess)
+void do_user(ConnectionSession_t *sess)
 {
     struct passwd *pw;
     if((pw = getpwnam(sess->args)) == NULL)
@@ -121,7 +121,7 @@ void do_user(Session_t *sess)
     ftp_reply(sess, FTP_GIVEPWORD, "Please specify the password.");
 }
 
-void do_pass(Session_t *sess)
+void do_pass(ConnectionSession_t *sess)
 {
     //struct passwd *getpwuid(uid_t uid)
     struct passwd *pw;
@@ -164,7 +164,7 @@ void do_pass(Session_t *sess)
 }
 
 
-void do_cwd(Session_t *sess)
+void do_cwd(ConnectionSession_t *sess)
 {
     if(chdir(sess->args) == -1)
     {
@@ -177,7 +177,7 @@ void do_cwd(Session_t *sess)
     ftp_reply(sess, FTP_CWDOK, "Directory successfully changed.");
 }
 
-void do_cdup(Session_t *sess)
+void do_cdup(ConnectionSession_t *sess)
 {
     if(chdir("..") == -1)
     {
@@ -190,13 +190,13 @@ void do_cdup(Session_t *sess)
     ftp_reply(sess, FTP_CWDOK, "Directory successfully changed.");
 }
 
-void do_quit(Session_t *sess)
+void do_quit(ConnectionSession_t *sess)
 {
     ftp_reply(sess, FTP_GOODBYE, "Good Bye!");
     exit(EXIT_SUCCESS);
 }
 
-void do_port(Session_t *sess)
+void do_port(ConnectionSession_t *sess)
 {
     //设置主动工作模式
     //PORT 192,168,44,1,200,174
@@ -220,7 +220,7 @@ void do_port(Session_t *sess)
     ftp_reply(sess, FTP_PORTOK, "PORT command successful. Consider using PASV.");
 }
 
-void do_pasv(Session_t *sess)
+void do_pasv(ConnectionSession_t *sess)
 {
     //printf("%s\n",__FUNCTION__ );
     char ip[16] = {0};
@@ -253,7 +253,7 @@ void do_pasv(Session_t *sess)
     ftp_reply(sess, FTP_PASVOK, text);
 }
 
-void do_type(Session_t *sess)
+void do_type(ConnectionSession_t *sess)
 {
     //指定FTP的传输模式
     if (strcmp(sess->args, "A") == 0)
@@ -272,43 +272,43 @@ void do_type(Session_t *sess)
     }
 }
 
-void do_stru(Session_t *sess)
+void do_stru(ConnectionSession_t *sess)
 {
 
 }
 
-void do_mode(Session_t *sess)
+void do_mode(ConnectionSession_t *sess)
 {
 
 }
 
-void do_retr(Session_t *sess)
+void do_retr(ConnectionSession_t *sess)
 {
     download_file(sess);
 }
 
-void do_stor(Session_t *sess)
+void do_stor(ConnectionSession_t *sess)
 {
     upload_file(sess, 0);
 }
 
-void do_appe(Session_t *sess)
+void do_appe(ConnectionSession_t *sess)
 {
     upload_file(sess, 1);
 }
 
-void do_list(Session_t *sess)
+void do_list(ConnectionSession_t *sess)
 {
     trans_list(sess, 1);
 }
 
 //实现简单的目录传输
-void do_nlst(Session_t *sess)
+void do_nlst(ConnectionSession_t *sess)
 {
     trans_list(sess, 0);
 }
 
-void do_rest(Session_t *sess)
+void do_rest(ConnectionSession_t *sess)
 {
     sess->restart_pos = atoll(sess->args);
     //Restart position accepted (344545).
@@ -317,13 +317,13 @@ void do_rest(Session_t *sess)
     ftp_reply(sess, FTP_RESTOK, text);
 }
 
-void do_abor(Session_t *sess)
+void do_abor(ConnectionSession_t *sess)
 {
     //225 No transfer to ABOR
     ftp_reply(sess, FTP_ABOR_NOCONN, "No transfer to ABOR.");
 }
 
-void do_pwd(Session_t *sess)
+void do_pwd(ConnectionSession_t *sess)
 {
     char tmp[1024] = {0};
     if(getcwd(tmp, sizeof tmp) == NULL)
@@ -340,7 +340,7 @@ void do_pwd(Session_t *sess)
     ftp_reply(sess, FTP_PWDOK, text);
 }
 
-void do_mkd(Session_t *sess)
+void do_mkd(ConnectionSession_t *sess)
 {
     if(mkdir(sess->args, 0777) == -1)
     {
@@ -365,7 +365,7 @@ void do_mkd(Session_t *sess)
     ftp_reply(sess, FTP_MKDIROK, text);
 }
 
-void do_rmd(Session_t *sess)
+void do_rmd(ConnectionSession_t *sess)
 {
     if(rmdir(sess->args) == -1)
     {
@@ -377,7 +377,7 @@ void do_rmd(Session_t *sess)
     ftp_reply(sess, FTP_RMDIROK, "Remove directory operation successful.");
 }
 
-void do_dele(Session_t *sess)
+void do_dele(ConnectionSession_t *sess)
 {
     if(unlink(sess->args) == -1)
     {
@@ -389,7 +389,7 @@ void do_dele(Session_t *sess)
     ftp_reply(sess, FTP_DELEOK, "Delete operation successful.");
 }
 
-void do_rnfr(Session_t *sess)
+void do_rnfr(ConnectionSession_t *sess)
 {
     if(sess->rnfr_name) //防止内存泄露
     {
@@ -402,7 +402,7 @@ void do_rnfr(Session_t *sess)
     ftp_reply(sess, FTP_RNFROK, "Ready for RNTO.");
 }
 
-void do_rnto(Session_t *sess)
+void do_rnto(ConnectionSession_t *sess)
 {
     if(sess->rnfr_name == NULL)
     {
@@ -423,7 +423,7 @@ void do_rnto(Session_t *sess)
     ftp_reply(sess, FTP_RENAMEOK, "Rename successful.");
 }
 
-void do_site(Session_t *sess)
+void do_site(ConnectionSession_t *sess)
 {
 
     char cmd[1024] = {0};
@@ -441,12 +441,12 @@ void do_site(Session_t *sess)
         ftp_reply(sess, FTP_BADCMD, "Unknown SITE command.");
 }
 
-void do_syst(Session_t *sess)
+void do_syst(ConnectionSession_t *sess)
 {
     ftp_reply(sess, FTP_SYSTOK, "UNIX Type: L8");
 }
 
-void do_feat(Session_t *sess)
+void do_feat(ConnectionSession_t *sess)
 {
     //211-Features:
     ftp_lreply(sess, FTP_FEAT, "Features:");
@@ -465,7 +465,7 @@ void do_feat(Session_t *sess)
     ftp_reply(sess, FTP_FEAT, "End");
 }
 
-void do_size(Session_t *sess)
+void do_size(ConnectionSession_t *sess)
 {
     struct stat sbuf;
     if(lstat(sess->args, &sbuf) == -1)
@@ -487,7 +487,7 @@ void do_size(Session_t *sess)
     ftp_reply(sess, FTP_SIZEOK, text);
 }
 
-void do_stat(Session_t *sess)
+void do_stat(ConnectionSession_t *sess)
 {
     ftp_lreply(sess, FTP_STATOK, "FTP server status:");
 
@@ -502,12 +502,12 @@ void do_stat(Session_t *sess)
     ftp_reply(sess, FTP_STATOK, "End of status");
 }
 
-void do_noop(Session_t *sess)
+void do_noop(ConnectionSession_t *sess)
 {
     ftp_reply(sess, FTP_GREET, "(FtpServer 1.0)");
 }
 
-void do_help(Session_t *sess)
+void do_help(ConnectionSession_t *sess)
 {
     ftp_lreply(sess, FTP_HELP, "The following commands are recognized.");
     writen(sess->peer_fd, " ABOR ACCT ALLO APPE CDUP CWD DELE EPRT EPSV FEAT HELP LIST MDTM MKD\r\n", strlen(" ABOR ACCT ALLO APPE CDUP CWD DELE EPRT EPSV FEAT HELP LIST MDTM MKD\r\n"));

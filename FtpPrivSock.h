@@ -13,10 +13,10 @@
 #define PRIV_SOCK_RESULT_OK 1
 #define PRIV_SOCK_RESULT_BAD 2
 
-void priv_sock_init(Session_t *sess);
-void priv_sock_close(Session_t *sess);
-void priv_sock_set_nobody_context(Session_t *sess);
-void priv_sock_set_proto_context(Session_t *sess);
+void priv_sock_init(ConnectionSession_t *sess);
+void priv_sock_close(ConnectionSession_t *sess);
+void priv_sock_set_nobody_context(ConnectionSession_t *sess);
+void priv_sock_set_proto_context(ConnectionSession_t *sess);
 void priv_sock_send_cmd(int fd, char cmd);
 char priv_sock_recv_cmd(int fd);
 void priv_sock_send_result(int fd, char res);

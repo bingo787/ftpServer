@@ -6,7 +6,7 @@
 #include "FtpTransportCtrl.h"
 
 //子进程不断的从FTP客户端接收FTP指令，并给与回应
-void handle_proto(Session_t *sess)
+void handle_proto(ConnectionSession_t *sess)
 {
     //往客户端写
     ftp_reply(sess, FTP_GREET, "(FtpServer 1.0)");

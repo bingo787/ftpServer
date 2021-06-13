@@ -5,14 +5,14 @@
 #include "FtpCommandMap.h"
 
 
-Session_t *p_sess = NULL;
+ConnectionSession_t *p_sess = NULL;
 
 static void handle_signal_alarm_ctrl_fd(int sig);
 static void handle_signal_alarm_data_fd(int sig);
 static void handle_signal_sigurg(int sig);
 
 //限速功能
-void limit_curr_rate(Session_t *sess, int nbytes, int is_upload)
+void limit_curr_rate(ConnectionSession_t *sess, int nbytes, int is_upload)
 {
     //获取当前时间
     int curr_time_sec = get_curr_time_sec();
@@ -171,7 +171,7 @@ void setup_signal_sigurg()
         ERR_EXIT("signal");
 }
 
-void do_site_chmod(Session_t *sess, char *args)
+void do_site_chmod(ConnectionSession_t *sess, char *args)
 {
     if (strlen(args) == 0)
     {
@@ -199,7 +199,7 @@ void do_site_chmod(Session_t *sess, char *args)
     }
 }
 
-void do_site_umask(Session_t *sess, char *args)
+void do_site_umask(ConnectionSession_t *sess, char *args)
 {
     // SITE UMASK [umask]
     if (strlen(args) == 0)
@@ -218,7 +218,7 @@ void do_site_umask(Session_t *sess, char *args)
     }
 }
 
-void do_site_help(Session_t *sess)
+void do_site_help(ConnectionSession_t *sess)
 {
     //214 CHMOD UMASK HELP
     ftp_reply(sess, FTP_HELP, "CHMOD UMASK HELP");

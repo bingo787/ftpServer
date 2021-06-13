@@ -43,15 +43,15 @@ typedef struct
 
     unsigned int curr_clients; //当前的客户数量
     unsigned int curr_ip_clients; //当前ip的客户数量
-}Session_t;
+}ConnectionSession_t;
 
 //初始化session
-void session_init(Session_t *sess);
+void SessionInit(ConnectionSession_t *sess);
 
 //将三个字符数组置位
-void session_reset_command(Session_t *sess);
+void session_reset_command(ConnectionSession_t *sess);
 
 //处理会话，这里主要是创建nobody与ftp子进程
-void session_begin(Session_t *sess);
+void session_begin(ConnectionSession_t *sess);
 
 #endif  /*_SESSION_H_*/

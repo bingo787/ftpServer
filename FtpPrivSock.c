@@ -4,7 +4,7 @@
 #include "FtpTransportCtrl.h"
 
 
-void priv_sock_init(Session_t *sess)
+void priv_sock_init(ConnectionSession_t *sess)
 {
     int fds[2];
     if(socketpair(PF_UNIX, SOCK_STREAM, 0, fds) == -1)
@@ -14,7 +14,7 @@ void priv_sock_init(Session_t *sess)
     sess->proto_fd = fds[1];
 }
 
-void priv_sock_close(Session_t *sess)
+void priv_sock_close(ConnectionSession_t *sess)
 {
     if(sess->nobody_fd != -1)
     {
@@ -28,7 +28,7 @@ void priv_sock_close(Session_t *sess)
         sess->proto_fd = -1;
     }
 }
-void priv_sock_set_nobody_context(Session_t *sess)
+void priv_sock_set_nobody_context(ConnectionSession_t *sess)
 {
     close(sess->peer_fd); //关闭控制连接
 
@@ -39,7 +39,7 @@ void priv_sock_set_nobody_context(Session_t *sess)
     }
 }
 
-void priv_sock_set_proto_context(Session_t *sess)
+void priv_sock_set_proto_context(ConnectionSession_t *sess)
 {
     if(sess->nobody_fd != -1)
     {

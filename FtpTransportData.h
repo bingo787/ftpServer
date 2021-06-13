@@ -3,8 +3,8 @@
 
 #include "FtpSession.h"
 
-void download_file(Session_t *sess);
-void upload_file(Session_t *sess, int is_appe);
-void trans_list(Session_t *sess, int list);
+void download_file(ConnectionSession_t *sess);
+void upload_file(ConnectionSession_t *sess, int is_appe);
+void trans_list(ConnectionSession_t *sess, int list);
 
 #endif  /*_TRANS_DATA_H_*/

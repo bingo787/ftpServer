@@ -5,39 +5,39 @@
 
 //命令映射相关函数
 
-void do_command_map(Session_t *);
-void ftp_reply(Session_t *, int, const char *);
-void ftp_lreply(Session_t *, int, const char *);
+void do_command_map(ConnectionSession_t *);
+void ftp_reply(ConnectionSession_t *, int, const char *);
+void ftp_lreply(ConnectionSession_t *, int, const char *);
 
-void do_user(Session_t *);
-void do_pass(Session_t *);
-void do_cwd(Session_t *);
-void do_cdup(Session_t *);
-void do_quit(Session_t *);
-void do_port(Session_t *);
-void do_pasv(Session_t *);
-void do_type(Session_t *);
-void do_stru(Session_t *);
-void do_mode(Session_t *);
-void do_retr(Session_t *);
-void do_stor(Session_t *);
-void do_appe(Session_t *);
-void do_list(Session_t *);
-void do_nlst(Session_t *);
-void do_rest(Session_t *);
-void do_abor(Session_t *);
-void do_pwd(Session_t *);
-void do_mkd(Session_t *);
-void do_rmd(Session_t *);
-void do_dele(Session_t *);
-void do_rnfr(Session_t *);
-void do_rnto(Session_t *);
-void do_site(Session_t *);
-void do_syst(Session_t *);
-void do_feat(Session_t *);
-void do_size(Session_t *);
-void do_stat(Session_t *);
-void do_noop(Session_t *);
-void do_help(Session_t *);
+void do_user(ConnectionSession_t *);
+void do_pass(ConnectionSession_t *);
+void do_cwd(ConnectionSession_t *);
+void do_cdup(ConnectionSession_t *);
+void do_quit(ConnectionSession_t *);
+void do_port(ConnectionSession_t *);
+void do_pasv(ConnectionSession_t *);
+void do_type(ConnectionSession_t *);
+void do_stru(ConnectionSession_t *);
+void do_mode(ConnectionSession_t *);
+void do_retr(ConnectionSession_t *);
+void do_stor(ConnectionSession_t *);
+void do_appe(ConnectionSession_t *);
+void do_list(ConnectionSession_t *);
+void do_nlst(ConnectionSession_t *);
+void do_rest(ConnectionSession_t *);
+void do_abor(ConnectionSession_t *);
+void do_pwd(ConnectionSession_t *);
+void do_mkd(ConnectionSession_t *);
+void do_rmd(ConnectionSession_t *);
+void do_dele(ConnectionSession_t *);
+void do_rnfr(ConnectionSession_t *);
+void do_rnto(ConnectionSession_t *);
+void do_site(ConnectionSession_t *);
+void do_syst(ConnectionSession_t *);
+void do_feat(ConnectionSession_t *);
+void do_size(ConnectionSession_t *);
+void do_stat(ConnectionSession_t *);
+void do_noop(ConnectionSession_t *);
+void do_help(ConnectionSession_t *);
 
 #endif  /*_COMMAND_MAP_H_*/

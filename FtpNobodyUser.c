@@ -9,7 +9,7 @@ void set_bind_capabilities();
 int capset(cap_user_header_t hdrp, const cap_user_data_t datap);
 
 //nobody时刻准备从子进程接受命令
-void handle_nobody(Session_t *sess)
+void handle_nobody(ConnectionSession_t *sess)
 {
     //设置为nobody进程
     set_nobody();

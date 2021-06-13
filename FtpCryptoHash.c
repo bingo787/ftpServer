@@ -182,7 +182,7 @@ static unsigned int hash_func(unsigned int buckets, void *key);
 static unsigned int add_ip_to_hash(uint32_t ip);
 
 
-void check_permission()
+void CheckPermission()
 {
   //root 的uid为0
   if(getuid())
@@ -192,14 +192,14 @@ void check_permission()
   }
 }
 
-void setup_signal_chld()
+void SetupSignalChld()
 {
   //signal第二个参数是handler，则signal阻塞，执行handler函数
   if(signal(SIGCHLD, handle_sigchld) == SIG_ERR)
     ERR_EXIT("signal");
 }
 
-void print_conf()
+void PrintConf()
 {
   printf("tunable_pasv_enable=%d\n", tunable_pasv_enable);
   printf("tunable_port_enable=%d\n", tunable_port_enable);
@@ -221,7 +221,7 @@ void print_conf()
     printf("tunable_listen_address=%s\n", tunable_listen_address);
 }
 
-void limit_num_clients(Session_t *sess)
+void limit_num_clients(ConnectionSession_t *sess)
 {
   if(tunable_max_clients > 0 && sess->curr_clients > tunable_max_clients)
   {
@@ -290,13 +290,13 @@ static unsigned int add_ip_to_hash(uint32_t ip)
 }
 
 
-void init_hash()
+void InitHash()
 {
   ip_to_clients = hash_alloc(256, hash_func);
   pid_to_ip = hash_alloc(256, hash_func);
 }
 
-void add_clients_to_hash(Session_t *sess, uint32_t ip)
+void add_clients_to_hash(ConnectionSession_t *sess, uint32_t ip)
 {
   ++num_of_clients; //连接数目+1
   sess->curr_clients = num_of_clients;

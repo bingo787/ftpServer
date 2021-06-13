@@ -7,6 +7,6 @@
  */
 #include "FtpSession.h"
 
-void handle_proto(Session_t *sess);
+void handle_proto(ConnectionSession_t *sess);
 
 #endif  /*_FTP_PROTO_H_*/
