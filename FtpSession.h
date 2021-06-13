@@ -1,7 +1,7 @@
 #ifndef _SESSION_H_
 #define _SESSION_H_
 
-#include "common_sys_header.h"
+#include "FtpCommonSysHeader.h"
 #define MAX_COMMAND 1024
 
 /*

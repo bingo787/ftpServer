@@ -1,5 +1,5 @@
-#include "utils.h"
-#include "common_sys_header.h"
+#include "FtpCommonHeader.h"
+#include "FtpCommonSysHeader.h"
 
 static ssize_t recv_peek(int sockfd, void *buf, size_t len);
 

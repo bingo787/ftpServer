@@ -1,7 +1,7 @@
 #ifndef _SYS_UTIL_H_
 #define _SYS_UTIL_H_
 
-#include "common_sys_header.h"
+#include "FtpCommonSysHeader.h"
 //去除右边的\r\n
 void str_trim_crlf(char *str);
 //分割字符串，根据c分割为两部分

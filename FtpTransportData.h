@@ -1,7 +1,7 @@
 #ifndef _TRANS_DATA_H_
 #define _TRANS_DATA_H_
 
-#include "session.h"
+#include "FtpSession.h"
 
 void download_file(Session_t *sess);
 void upload_file(Session_t *sess, int is_appe);

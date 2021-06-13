@@ -3,4 +3,6 @@ ftpServer
 a.out
 .*.swp
 *.exe
-
+.idea/
+build/
+cmake-build*

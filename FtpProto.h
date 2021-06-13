@@ -5,7 +5,7 @@
  * 子进程
  *
  */
-#include "session.h"
+#include "FtpSession.h"
 
 void handle_proto(Session_t *sess);
 

@@ -1,9 +1,9 @@
-#include "transport_ctrl.h"
-#include "common_sys_header.h"
-#include "utils.h"
-#include "configuration.h"
-#include "command_map.h"
-#include "ftp_codes_define.h"
+#include "FtpTransportCtrl.h"
+#include "FtpCommonSysHeader.h"
+#include "FtpCommonHeader.h"
+#include "FtpGlobalConfiguration.h"
+#include "FtpCommandMap.h"
+
 
 Session_t *p_sess = NULL;
 

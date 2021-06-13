@@ -1,9 +1,9 @@
-#include "common_sys_header.h"
-#include "utils.h"
-#include "session.h"
-#include "configuration.h"
-#include "parse_conf.h"
-#include "ftp_assist.h"
+#include "FtpCommonSysHeader.h"
+#include "FtpCommonHeader.h"
+#include "FtpSession.h"
+#include "FtpGlobalConfiguration.h"
+#include "FtpParseConfig.h"
+#include "FtpCryptoHash.h"
 
 int main(int argc, const char *argv[])
 {

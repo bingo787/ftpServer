@@ -1,4 +1,4 @@
-#include "configuration.h"
+#include "FtpGlobalConfiguration.h"
 
 int tunable_pasv_enable = 1;
 int tunable_port_enable = 1;

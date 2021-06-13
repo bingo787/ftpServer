@@ -1,7 +1,7 @@
 #ifndef _COMMAND_MAP_H_
 #define _COMMAND_MAP_H_
 
-#include "session.h"
+#include "FtpSession.h"
 
 //命令映射相关函数
 

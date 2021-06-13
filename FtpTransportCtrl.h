@@ -4,7 +4,7 @@
 /*
  *限速模块
  */
-#include "session.h"
+#include "FtpSession.h"
 
 void limit_curr_rate(Session_t *sess, int nbytes, int is_upload);
 

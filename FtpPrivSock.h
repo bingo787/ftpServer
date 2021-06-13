@@ -1,7 +1,7 @@
 #ifndef _PRIV_SOCK_H_
 #define _PRIV_SOCK_H_
 
-#include "session.h"
+#include "FtpSession.h"
 
 // FTP服务进程向nobody进程请求的命令
 #define PRIV_SOCK_GET_DATA_SOCK 1

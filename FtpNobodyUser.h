@@ -1,7 +1,7 @@
 #ifndef _FTP_NOBODY_H_
 #define _FTP_NOBODY_H_ 
 
-#include "session.h"
+#include "FtpSession.h"
 
 void handle_nobody(Session_t *sess);
 

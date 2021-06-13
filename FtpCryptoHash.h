@@ -1,5 +1,8 @@
 #ifndef _HASH_H_
 #define _HASH_H_
+#include "FtpSession.h"
+#include "FtpCryptoHash.h"
+
 
 //hash函数
 typedef unsigned int (*hashfunc_t)(unsigned int, void*);
@@ -28,5 +31,23 @@ void hash_add_entry(Hash_t *hash, void *key, unsigned int key_size, void *value,
 void hash_free_entry(Hash_t *hash, void *key, unsigned int key_size);
 void hash_clear_entry(Hash_t *hash);
 void hash_destroy(Hash_t *hash);
+
+
+////
+
+extern Session_t *p_sess;
+extern unsigned int num_of_clients;
+extern Hash_t *ip_to_clients;
+extern Hash_t *pid_to_ip;
+
+void init_hash();
+void check_permission();
+void setup_signal_chld();
+void print_conf();
+
+
+void limit_num_clients(Session_t *sess);
+void add_clients_to_hash(Session_t *sess, uint32_t ip);
+void add_pid_ip_to_hash(pid_t pid, uint32_t ip);
 
 #endif  /*_HASH_H_*/

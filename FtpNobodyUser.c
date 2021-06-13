@@ -1,8 +1,8 @@
-#include "ftp_nobody.h"
-#include "common_sys_header.h"
-#include "utils.h"
-#include "priv_command.h"
-#include "priv_sock.h"
+#include "FtpNobodyUser.h"
+#include "FtpCommonSysHeader.h"
+#include "FtpCommonHeader.h"
+#include "FtpPrivOpCommand.h"
+#include "FtpPrivSock.h"
 
 void set_nobody();
 void set_bind_capabilities();

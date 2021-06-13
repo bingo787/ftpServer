@@ -1,7 +1,7 @@
-#include "parse_conf.h"
-#include "common_sys_header.h"
-#include "utils.h"
-#include "configuration.h"
+#include "FtpParseConfig.h"
+#include "FtpCommonSysHeader.h"
+#include "FtpCommonHeader.h"
+#include "FtpGlobalConfiguration.h"
 
 /*
  * parseconf_load_setting()函数只是
